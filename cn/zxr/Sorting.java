@@ -1,5 +1,8 @@
 package cn.zxr;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Sorting {
     public static void swap(int A[], int i, int j){
         int temp;
@@ -84,6 +87,69 @@ public class Sorting {
        }
     }
 
+    //和插入排序差不多，只是每次移动h,h在不停的变化,也就是将手牌分为两部分，然后互相插入
+    public static void shellSort(int A[]){
+        int h = 0;
+        while (h < A.length){
+            h = h * 3 + 1;
+        }
+        while (h >= 1){
+            for(int i = h; i < A.length; i++){
+                int j = i - h;
+                int get = A[i];
+                while(j >= 0 && A[j] > get){
+                    A[j + h] = A[j];
+                    j -= h;
+                }
+                A[j + h] = get;
+            }
+            h = (h - 1) / 3;
+        }
+    }
+
+//    public static void merge(int A[], int left, int mid, int right){
+//           int len = right - left + 1;
+//           int[] stock = new int[len];
+//           int index = 0;
+//           int i = left;
+//           int j = mid + 1;
+//           while (i == right){
+//               stock[index++] = A[i];
+//           }
+//           while (i < mid){
+//               stock[index++] = A[i++];
+//           }
+//           while (j < right){
+//               stock[index++] = A[j++];
+//           }
+//           for (int k = 0; k < len; k++){
+//               A[left++] = stock[k];
+//           }
+//        }
+//
+//    public static void mergeSortRecursion(int A[], int left, int right){
+//        if(left == right)
+//            return;
+//        int mid = (left + right) / 2;
+//        mergeSortRecursion(A, left, mid);
+//        mergeSortRecursion(A, mid + 1, right);
+//        merge(A, left, mid, right);
+//    }
+//
+//    public static void mergeSortIteration(int A[], int len){
+//        int left, mid, right;
+//        for(int i = 1; i < len; i *= 2){
+//            left = 0;
+//            while (left + i < len){
+//                mid = left + i - 1;
+//                right = mid + i + 1;
+//                merge(A, left, mid, right);
+//                left = right + 1;
+//            }
+//        }
+//    }
+
+    int partition(int A[], int len){}
 
 
     public static void main(String[] args) {
@@ -92,7 +158,8 @@ public class Sorting {
 //        cocktailSort(A);
 //        selectionSort(A);
 //        insertionSort(A);
-        insertionSortDichotomy(A);
+//        insertionSortDichotomy(A);
+//        shellSort(A);
         for(int i = 0; i < A.length; i++){
             System.out.print(A[i] + ",");
         }
