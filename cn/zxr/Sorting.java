@@ -149,19 +149,41 @@ public class Sorting {
 //        }
 //    }
 
-    int partition(int A[], int len){}
+//    int partition(int A[], int len){}
+    static int partition(int A[], int s, int e){
+       int x = A[e];
+       int i = s - 1;
+       for(int j = s; j < e; j++){
+           if ( A[j] <= x ) {
+               i += 1;
+               swap( A, i, j );
+           }
+       }
+       swap( A, i + 1, e );
+       return i + 1;
+    }
+
+    static void quickSort(int A[], int s, int e){
+        if ( s >= e )
+            return;
+        int index = partition( A, s, e );
+        quickSort( A, s, index - 1 );
+        quickSort( A, index + 1, e );
+    }
 
 
     public static void main(String[] args) {
         int A[] = {8, 7, 6, 5, 4, 3, 2, 1};
+        int B[] = {7 , 9, 19, 3, 1, 2, 6};
 //        bubbleSort(A);
 //        cocktailSort(A);
 //        selectionSort(A);
 //        insertionSort(A);
 //        insertionSortDichotomy(A);
 //        shellSort(A);
-        for(int i = 0; i < A.length; i++){
-            System.out.print(A[i] + ",");
+        quickSort(B, 0, B.length - 1);
+        for(int i = 0; i < B.length; i++){
+            System.out.print(B[i] + ",");
         }
     }
 }
